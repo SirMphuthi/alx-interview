@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/node
 /**
  * A script that prints all characters of a Star Wars movie
  * based on the provided Movie ID.
@@ -14,7 +14,7 @@ const movieId = process.argv[2]; // Get the Movie ID from command-line arguments
 
 // Check if a Movie ID was provided
 if (!movieId) {
-  console.error("Usage: ./0-starwars_characters.js <movie_id>");
+  console.error('Usage: ./0-starwars_characters.js <movie_id>');
   process.exit(1); // Exit with an error code
 }
 
@@ -53,7 +53,6 @@ axios.get(filmUrl, { httpsAgent: agent }) // Use the agent for the film request
     // This console.log('') will ensure there's an extra newline character
     // at the very end of the entire script's output, which some checkers require.
     console.log('');
-
   })
   .catch(error => {
     // Enhanced error handling for axios
