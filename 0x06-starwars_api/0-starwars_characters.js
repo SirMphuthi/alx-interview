@@ -17,7 +17,13 @@ if (!movieId) {
 
 const filmUrl = `https://swapi.dev/api/films/${movieId}/`;
 
-request(filmUrl, (error, response, body) => {
+// Define request options, including strictSSL: false to bypass certificate check
+const requestOptions = {
+  url: filmUrl,
+  strictSSL: false // <<<--- ADD THIS LINE to bypass SSL certificate validation
+};
+
+request(requestOptions, (error, response, body) => { // Pass requestOptions object here
   if (error) {
     console.error(`Error connecting to the Star Wars API: ${error.message}`);
     process.exit(1);
@@ -44,7 +50,13 @@ request(filmUrl, (error, response, body) => {
         return; // All characters fetched
       }
 
-      request(characterUrls[index], (charError, charResponse, charBody) => {
+      // Define options for character requests, also with strictSSL: false
+      const charRequestOptions = {
+        url: characterUrls[index],
+        strictSSL: false // <<<--- ADD THIS LINE for character requests too
+      };
+
+      request(charRequestOptions, (charError, charResponse, charBody) => { // Pass charRequestOptions object here
         if (charError) {
           console.error(`Error fetching character: ${charError.message}`);
           // Continue to next character even if one fails
